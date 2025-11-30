@@ -56,3 +56,36 @@ kubectl delete service mynginx
 minikube stop
 
 minikube delete
+
+**PIPELINE CODE**
+
+pipeline {
+    agent any
+    tools{
+        maven 'MAVEN_HOME'
+    }
+    stages {
+        stage('git repo & clean') {
+            steps {
+                //bat "rmdir  /s /q mavenjava"
+                bat "git clone https://github.com/srivijju/jenkins_web.git"
+                bat "mvn clean -f jenkins_web"
+            }
+        }
+        stage('install') {
+            steps {
+                bat "mvn install -f jenkins_web"
+            }
+        }
+        stage('test') {
+            steps {
+                bat "mvn test -f jenkins_web"
+            }
+        }
+        stage('package') {
+            steps {
+                bat "mvn package -f jenkins_web"
+            }
+        }
+    }
+}
