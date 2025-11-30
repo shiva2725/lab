@@ -18,3 +18,41 @@ Press CTRL + O → Enter
 Press CTRL + X → Exit
 
 http://localhost:3000
+
+
+**NAGIOS**
+
+docker pull jasonrivers/nagios:latest
+
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+
+**Minikube**
+
+minikube start --driver=docker
+
+minikube kubectl -- get pods -A
+
+kubectl version --client
+
+minikube start
+
+kubectl create deployment mynginx --image=nginx
+
+kubectl get deployments
+
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+
+kubectl scale deployment mynginx --replicas=4
+
+kubectl get service mynginx
+
+kubectl port-forward svc/mynginx 8081:80
+
+Open localhost after that delete
+
+kubectl delete deployment mynginx
+kubectl delete service mynginx
+
+minikube stop
+
+minikube delete
